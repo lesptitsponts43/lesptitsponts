@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ actualite.titre }}{% endblock %}
+{% block stylesheets %}       {{ parent() }}
+ <link rel="stylesheet" href="{{ asset('css/news.css') }}">{% endblock %}
+
+{% block body %}
+
+<h1>{{ actualite.titre }}</h1>
+
+<div class="actualite-detail">
+    {# Image de l'événement #}
+    {% if actualite.image %}
+        <img src="{{ asset('/uploads/actualites/' ~ actualite.image) }}" 
+             alt="{{ actualite.titre }}" 
+             class="actualite-image" 
+             style="max-width:300px;">
+    {% endif %}
+
+    <p><strong>Date :</strong> {{ actualite.date|date('d/m/Y H:i') }}</p>
+    <p>{{ actualite.description }}</p>
+</div>
+
+<hr>
+
+<h2>Reservez maintenant ! </h2><br>
+<div class="produits-lies" style="display:flex; flex-wrap:wrap; gap:20px;">
+    {% for produit in actualite.produits %}
+        <div class="produit-card" style="border:1px solid #ccc; padding:30px; width:300px;">
+            {% if produit.image %}
+                <img src="{{ asset('/uploads/produits/' ~ produit.image) }}" 
+                     alt="{{ produit.titre }}" 
+                     style="max-width:100%;">
+            {% endif %}
+            <h3>{{ produit.titre }}</h3>
+            <p>{{ produit.description|length > 50 ? produit.description[:50] ~ '...' : produit.description }}</p>
+            <p><strong>Prix :</strong> {{ produit.prixUnitaire }} €</p>
+
+            {# Bouton "Mettre au panier" - on suppose une route 'cart_add' #}
+            <form method="post" action="#">
+                <button type="submit">Mettre au panier</button>
+            </form>
+        </div>
+    {% else %}
+        <p>Aucun produit associé pour cet événement.</p>
+    {% endfor %}
+</div>
+{% endblock %}

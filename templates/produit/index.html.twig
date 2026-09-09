@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Réservations{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/produit.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/news.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="mb-4 text-center">Réservez maintenant !</h1>
+    <div class="produits-lies">
+        {% for produit in produits %}
+            <div class="produit-card text-center">
+                {% if produit.image %}
+                    <img src="{{ asset('/uploads/produits/' ~ produit.image) }}" alt="{{ produit.titre }}">
+                {% endif %}
+                <h3>{{ produit.titre }}</h3>
+                <p>{{ produit.description|length > 80 ? produit.description[:80] ~ '...' : produit.description }}</p>
+                <p><strong>Prix :</strong> {{ produit.prixUnitaire }} €</p>
+
+                <form method="post" action="#">
+                    <button type="submit" class="btn-acheter">Mettre au panier</button>
+                </form>
+            </div>
+        {% else %}
+            <p>Aucun produit disponible pour cet événement.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

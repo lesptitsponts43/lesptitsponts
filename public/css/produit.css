@@ -1,0 +1,35 @@
+ .produit-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .produit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .produit-card img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .produits-lies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .btn-acheter {
+            background-color: #28a745; /* vert */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        .btn-acheter:hover {
+            background-color: #218838;
+        }

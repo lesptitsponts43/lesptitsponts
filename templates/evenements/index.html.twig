@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/news.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center mb-3">📰 Évènements</h1>
+    <p class="text-center">Restez informé des dernières nouvelles de notre association</p>
+
+    {% if actualites is defined and actualites|length > 0 %}
+        <div class="news-grid">
+            {% for actualite in actualites %}
+                <article class="news-card">
+                    {% if actualite.image %}
+                        <img src="{{ asset('/uploads/actualite/' ~ actualite.image) }}" alt="{{ actualite.titre }}" class="news-image">
+                    {% else %}
+                        <div class="news-image"></div>
+                    {% endif %}
+                    
+                    <div class="news-content">
+                        <h2 class="news-title">{{ actualite.titre }}</h2>
+                        <p class="news-excerpt">
+                            <i>{{ actualite.description|raw }}</i>
+                        </p>
+                        <div class="news-meta">
+                            <div class="news-date">🕒 {{ actualite.date|date('d/m/Y') }}</div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="no-news">
+            <p>Aucune actualité disponible pour le moment.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

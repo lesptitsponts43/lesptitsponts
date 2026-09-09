@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qui sommes-nous{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="mb-5 text-center">Qui sommes-nous ?</h1>
+
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <img src="/images/enfants-foot.jpg" alt="Enfants jouant au foot" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-6 d-flex flex-column justify-content-center">
+            <p>
+                Nous sommes une association de parents d’enfants de 6 à 7 ans, tous passionnés de football. 
+                Notre objectif est d’offrir à nos jeunes joueurs des expériences uniques et mémorables autour de leur sport favori.
+            </p>
+            <p>
+                Grâce à notre association, nous organisons des événements comme des tournois dans le sud, permettant aux enfants de 
+                s’amuser, de se dépasser et de créer des souvenirs inoubliables.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mb-5 text-center">
+        <h2 class="mb-4">Notre mission</h2>
+        <p class="col-md-8 offset-md-2">
+            Utiliser les bénéfices de nos actions pour créer des moments forts pour les enfants et leur transmettre les valeurs du sport et de l’esprit d’équipe.
+        </p>
+    </div>
+
+    <div class="row text-center">
+        <h2 class="mb-4">Nos valeurs</h2>
+        <div class="col-md-4 mb-4">
+            <i class="fas fa-futbol fa-3x mb-3"></i>
+            <h4>Passion</h4>
+            <p>Transmettre l'amour du football et le plaisir de jouer en équipe.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <i class="fas fa-users fa-3x mb-3"></i>
+            <h4>Esprit d’équipe</h4>
+            <p>Apprendre à coopérer, à se soutenir et à respecter les autres.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+            <i class="fas fa-smile fa-3x mb-3"></i>
+            <h4>Souvenirs</h4>
+            <p>Créer des moments inoubliables et positifs qui marqueront leur enfance.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

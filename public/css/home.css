@@ -1,0 +1,213 @@
+/* public/css/home.css */
+
+/* Hero section */
+.hero {
+    background-image: url('/charte/equipe.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    color: white;
+    position: relative;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 100, 0, 0.5);
+}
+.hero-content {
+    position: relative;
+    padding: 100px 20px;        /* espace autour du contenu */
+    text-align: center;
+    color: white;               /* texte blanc si fond sombre */
+    background-image: url('/charte/equipe.jpg'); /* chemin de ton image */
+    background-size: cover;      /* l'image couvre tout le bloc */
+    background-position: center; /* centrage de l'image */
+    background-repeat: no-repeat;
+}
+.hero-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* semi-transparent */
+    z-index: 0;
+}
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 80px 15px;
+    }
+}
+.hero-content > * {
+    position: relative;
+    z-index: 1; /* texte au-dessus de l'overlay */
+}
+
+/* Sections */
+.presentation, .valeurs, .evenements, .galerie {
+    padding: 60px 50px;
+    font-size:22px;
+}
+
+.valeurs-items {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.valeur {
+    max-width: 200px;
+    text-align: center;
+}
+
+.galerie .images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.galerie img {
+    width: 250px;
+    border-radius: 10px;
+}
+
+.evenements ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.evenements li {
+    margin-bottom: 20px;
+}
+
+/* News popup flottante */
+.news-popup {
+    position: fixed;
+    right: 20px;
+    top: 150px;
+    width: 300px;
+    max-height: 800px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 1050;
+}
+
+.news-popup .news-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.news-popup .news-body {
+    padding: 10px 15px;
+}
+
+.news-popup img {
+    max-height: 350px;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5px;
+}
+
+/* Close button */
+.news-popup .btn-close {
+    font-size: 0.8rem;
+}
+
+.valeurs {
+    padding: 50px 20px;
+    background-color: #f9f9f9; /* optionnel, pour mieux voir le bloc */
+}
+
+.valeurs h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.valeurs-items {
+    display: flex;
+    justify-content: space-around; /* espace entre les éléments */
+    flex-wrap: wrap; /* pour que ça descende sur mobile */
+    gap: 30px; /* espace entre chaque carte */
+}
+
+.valeur {
+    flex: 1 1 300px; /* chaque carte prend au moins 300px, mais peut s'étendre */
+    max-width: 400px;
+    text-align: center;
+}
+
+.valeur img {
+    width: 100%;
+    height: auto;
+    max-width: 300px; /* taille maximale de l'image */
+    margin-bottom: 20px;
+}
+
+.valeur h3 {
+    margin-bottom: 10px;
+}
+
+.valeur div {
+    text-align: justify;
+}
+
+/* ===== VERSION MOBILE ===== */
+@media (max-width: 768px) {
+
+    .news-popup {
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        border-radius: 20px 20px 0 0;
+        max-height: 80vh;
+        animation: slideUpMobile 0.4s ease;
+    }
+
+    .news-body {
+        max-height: 65vh;
+        padding: 20px;
+    }
+
+    .news-header {
+        border-radius: 20px 20px 0 0;
+        padding: 15px 20px;
+    }
+
+    .news-item img {
+        border-radius: 10px;
+    }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUpMobile {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

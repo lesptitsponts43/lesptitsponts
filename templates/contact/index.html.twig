@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary color-vert">
+                    <h2 class="mb-0">Contactez-nous</h2>
+                </div>
+                <div class="intro-text" style="margin: 20px;">Écrivez-nous, nous serons <b>ravis de vous répondre rapidement !</b></div>
+                <div class="card-body">
+                    {# Affichage des messages flash #}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
+
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card social-card">
+                <div class="card-header bg-primary color-vert">
+                    <h2> Suivez-nous <span class="emoji-decoration">💬</span></h2>
+                </div>
+                <div class="social-links">
+                 <div class="intro-text">
+                                Une envie de vous <b>engager</b> à nos côtés ? <br>
+                                🤝 Devenir bénévole &nbsp;•&nbsp; ❤️ Faire un don &nbsp;•&nbsp; 📞 Partenariat &nbsp;•&nbsp; ❓ Question •&nbsp; 💡 Suggestion <br><br>
+                        </div>
+                    {# INSTAGRAM #}
+                    <a href="https://www.instagram.com/vos_identifiants/" target="_blank" rel="noopener noreferrer" class="social-item instagram">
+                        <div class="social-icon">📷</div>
+                        <div class="social-content">
+                            <h4>Instagram</h4>
+                            <p>Suivez nos <span class="handle">@associationpetitsponts</span></p>
+                        </div>
+                    </a>
+
+                    {# FACEBOOK #}
+                    <a href="https://www.facebook.com/people/Les-Ptits-Ponts/61584729964222/" target="_blank" rel="noopener noreferrer" class="social-item facebook">
+                        <div class="social-icon">👍</div>
+                        <div class="social-content">
+                            <h4>Facebook</h4>
+                            <p>Rejoignez notre <span class="handle">page Facebook</span></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

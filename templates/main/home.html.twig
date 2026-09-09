@@ -1,0 +1,91 @@
+{# templates/home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Association Petits Ponts{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<header class="hero text-center text-white">
+    <div class="hero-content">
+        <h1>Bienvenue sur le site de notre association !</h1>
+        <p>Pour le plaisir du foot et des souvenirs inoubliables pour nos enfants.</p>
+        <a href="{{ path('equipe') }}" class="btn btn-success btn-lg mt-3">En savoir plus</a>
+    </div>
+</header>
+{% if blocAccueil is defined %}
+    <section class="presentation text-center container">
+        <h2>{{ blocAccueil.titre |raw }}</h2>
+        <p>{{ blocAccueil.texte |raw }}</p>
+    </section>
+{% endif %}
+ {% if valeurs is defined and valeurs|length > 0 %}
+    <section class="valeurs text-center">
+        <h2>Nos valeurs</h2>
+        <div class="valeurs-items">
+            {% for valeur in valeurs %}
+                <div class="valeur">
+                    <img src="{{ asset('/uploads/valeurs/' ~ valeur.image) }}" style="width:150px;" alt="{{ valeur.titre }}">
+                    <h3 class="color-vert">{{ valeur.titre }}</h3>
+                    <p>{{ valeur.description|raw }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}
+
+{% if galeries is defined and galeries|length > 0 %}
+    <section class="galerie text-center">
+        <h2>Galerie</h2>
+        <div class="images">
+        {% for galerie in galeries %}
+            <img src="{{ asset('/uploads/galerie/' ~ galerie.image) }}" alt="{{ galerie.titre }}" class="img-fluid mb-2 rounded">
+        {% endfor %}
+        </div>
+    </section>
+{% endif %}
+
+{# Popup actualités flottante #}
+<div class="news-popup">
+    <div class="news-header bg-success text-white">
+        <h5>📰 Dernières actualités</h5>
+        <button class="btn-close btn-close-white close-news" aria-label="Fermer"></button>
+    </div>
+    <div class="news-body">
+        {% if actualites is defined and actualites|length > 0 %}
+            {% for actualite in actualites %}
+                <div class="news-item mb-3">
+                    <a href="{{ path('news_show', {'id': actualite.id}) }}" class="text-decoration-none text-dark">
+                        {% if actualite.image %}
+                            <img src="{{ asset('/uploads/actualite/' ~ actualite.image) }}" alt="{{ actualite.titre }}" class="img-fluid mb-2 rounded">
+                        {% endif %}
+                        <h6 class="text-success">{{ actualite.titre }}</h6>
+                        <p>{{ actualite.extrait|default(actualite.description|striptags|slice(0, 120) ~ '...') }}</p>
+                        <small class="text-muted">{{ actualite.date|date('d/m/Y') }}</small>
+                        <hr>
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucune actualité pour le moment.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const closeBtn = document.querySelector('.close-news');
+        const popup = document.querySelector('.news-popup');
+
+        closeBtn.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}
