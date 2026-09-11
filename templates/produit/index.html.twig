@@ -21,8 +21,12 @@
                 <p>{{ produit.description|length > 80 ? produit.description[:80] ~ '...' : produit.description }}</p>
                 <p><strong>Prix :</strong> {{ produit.prixUnitaire }} €</p>
 
-                <form method="post" action="#">
-                    <button type="submit" class="btn-acheter">Mettre au panier</button>
+                <form method="post" action="{{ path('panier_ajouter', {id: produit.id}) }}">
+                    <input type="hidden" name="quantite" value="1">
+
+                    <button type="submit" class="btn-acheter">
+                        🛒 Mettre au panier
+                    </button>
                 </form>
             </div>
         {% else %}

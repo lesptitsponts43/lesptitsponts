@@ -1,0 +1,30 @@
+[1mdiff --git a/src/Controller/Admin/ActualiteCrudController.php b/src/Controller/Admin/ActualiteCrudController.php[m
+[1mindex 0b39882..2dc4073 100644[m
+[1m--- a/src/Controller/Admin/ActualiteCrudController.php[m
+[1m+++ b/src/Controller/Admin/ActualiteCrudController.php[m
+[36m@@ -28,9 +28,11 @@[m [mclass ActualiteCrudController extends AbstractCrudController[m
+         yield TextField::new('titre', 'Titre');[m
+         [m
+         yield TextEditorField::new('description', 'Description');[m
+[32m+[m
+[32m+[m[32m        yield DateTimeField::new('date', 'Date');[m
+         [m
+         yield ImageField::new('image', 'Image')[m
+[31m-            ->setBasePath('/uploads/galerie')[m
+[32m+[m[32m            ->setBasePath('/uploads/actualites')[m
+             ->onlyOnIndex();[m
+ [m
+         yield TextField::new('imageFile', 'Télécharger une image')[m
+[1mdiff --git a/src/Entity/Actualite.php b/src/Entity/Actualite.php[m
+[1mindex 30de292..0b6cb53 100644[m
+[1m--- a/src/Entity/Actualite.php[m
+[1m+++ b/src/Entity/Actualite.php[m
+[36m@@ -44,6 +44,8 @@[m [mclass Actualite[m
+     public function __construct()[m
+     {[m
+         $this->produits = new ArrayCollection();[m
+[32m+[m[32m        $this->date = new \DateTimeImmutable();[m[41m[m
+[32m+[m[41m[m
+     }[m
+ [m
+     // --- Getters & Setters ---[m

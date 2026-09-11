@@ -1,14 +1,16 @@
-<div class="partner-block">
-    <h3 class="text-center">{{ title }}</h3>
-    <div class="container">
-        <ul class="partner-list justify-content-center">
-            {% for partenaire in partenaires %}
-                <li class="partner-item">
-                    <a href="{{ partenaire.lien }}" target="_blank" rel="noopener">
-                        <img src="{{ asset('/uploads/partenaire/' ~ partenaire.image) }}" alt="{{ partenaire.titre }}" class="news-image">
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+ {% if partenaires is not empty %}
+    <div class="partner-block">
+        <h3 class="text-center">{{ title }}</h3>
+        <div class="container">
+            <ul class="partner-list justify-content-center">
+                {% for partenaire in partenaires %}
+                    <li class="partner-item">
+                        <a href="{{ partenaire.lien }}" target="_blank" rel="noopener">
+                            <img src="{{ asset('/uploads/partenaire/' ~ partenaire.image) }}" alt="{{ partenaire.titre }}" class="news-image">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</div>
+{% endif %}

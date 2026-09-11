@@ -37,11 +37,18 @@ class Produit
     private ?\DateTimeInterface $updatedAt = null;
 
     #[ORM\ManyToMany(targetEntity: Actualite::class, mappedBy: "produits")]
-    private Collection $evenements; 
+    private Collection $evenements;
+
+    /**
+     * @var Collection<int, LigneCommande>
+     */
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: LigneCommande::class)]
+    private Collection $ligneCommandes; 
 
     public function __construct()
     {
         $this->evenements = new ArrayCollection();
+        $this->ligneCommandes = new ArrayCollection();
     }
 
     // --- Getters & Setters ---
@@ -140,6 +147,36 @@ class Produit
     public function removeEvenement(Actualite $evenement): self
     {
         $this->evenements->removeElement($evenement);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LigneCommande>
+     */
+    public function getLigneCommandes(): Collection
+    {
+        return $this->ligneCommandes;
+    }
+
+    public function addLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if (!$this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes->add($ligneCommande);
+            $ligneCommande->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if ($this->ligneCommandes->removeElement($ligneCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getProduit() === $this) {
+                $ligneCommande->setProduit(null);
+            }
+        }
 
         return $this;
     }

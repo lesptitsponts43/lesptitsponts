@@ -8,7 +8,7 @@
 
     <div class="row mb-5">
         <div class="col-md-6">
-            <img src="/images/enfants-foot.jpg" alt="Enfants jouant au foot" class="img-fluid rounded shadow">
+            <img src="uploads/galerie/parents.jpg" alt="Enfants jouant au foot" class="img-fluid rounded shadow">
         </div>
         <div class="col-md-6 d-flex flex-column justify-content-center">
             <p>
@@ -29,23 +29,19 @@
         </p>
     </div>
 
-    <div class="row text-center">
-        <h2 class="mb-4">Nos valeurs</h2>
-        <div class="col-md-4 mb-4">
-            <i class="fas fa-futbol fa-3x mb-3"></i>
-            <h4>Passion</h4>
-            <p>Transmettre l'amour du football et le plaisir de jouer en équipe.</p>
+     {% if valeurs is defined and valeurs|length > 0 %}
+    <section class="valeurs text-center">
+        <h2>Nos valeurs</h2>
+        <div class="valeurs-items">
+            {% for valeur in valeurs %}
+                <div class="valeur">
+                    <img src="{{ asset('/uploads/valeurs/' ~ valeur.image) }}" style="width:150px;" alt="{{ valeur.titre }}">
+                    <h3 class="color-vert">{{ valeur.titre }}</h3>
+                    <p>{{ valeur.description|raw }}</p>
+                </div>
+            {% endfor %}
         </div>
-        <div class="col-md-4 mb-4">
-            <i class="fas fa-users fa-3x mb-3"></i>
-            <h4>Esprit d’équipe</h4>
-            <p>Apprendre à coopérer, à se soutenir et à respecter les autres.</p>
-        </div>
-        <div class="col-md-4 mb-4">
-            <i class="fas fa-smile fa-3x mb-3"></i>
-            <h4>Souvenirs</h4>
-            <p>Créer des moments inoubliables et positifs qui marqueront leur enfance.</p>
-        </div>
-    </div>
+    </section>
+{% endif %}
 </div>
 {% endblock %}

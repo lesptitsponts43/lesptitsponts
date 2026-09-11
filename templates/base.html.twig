@@ -12,6 +12,7 @@
 
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     {% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -28,24 +29,60 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'home' %}active{% endif %}" href="{{ path('home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'contact' %}active{% endif %}" href="{{ path('contact') }}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'news' %}active{% endif %}" href="{{ path('news') }}">Évènement</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if app.request.attributes.get('_route') == 'products' %}active{% endif %}" href="{{ path('products') }}">Produits</a>
-                    </li>
-                </ul>
+
+    <li class="nav-item">
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'home' %}active{% endif %}"
+           href="{{ path('home') }}">
+            Accueil
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'contact' %}active{% endif %}"
+           href="{{ path('contact') }}">
+            Contact
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'news' %}active{% endif %}"
+           href="{{ path('news') }}">
+            Évènement
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {% if app.request.attributes.get('_route') == 'products' %}active{% endif %}"
+           href="{{ path('products') }}">
+            Produits
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link position-relative {% if app.request.attributes.get('_route') == 'order' %}active{% endif %}"
+           href="{{ path('order') }}">
+
+            🛒 Panier
+
+            {% if nombreArticlesPanier > 0 %}
+                <span class="badge rounded-pill bg-success panier-badge">
+                    {{ nombreArticlesPanier }}
+                </span>
+            {% endif %}
+
+        </a>
+    </li>
+
+</ul>
             </div>
         </div>
     </nav>
     <div class="text-center" style="max-height:200px;">
-    <img src="{{ asset('charte/logo.png') }}" alt="Les Petits Ponts" style="max-height:200px;"/>
+    <div class="text-center logo-container">
+    <img src="{{ asset('charte/logo.png') }}"
+         alt="Les Petits Ponts"
+         class="logo">
+</div>
     </div>
 
     {# Contenu principal flexible #}
@@ -68,8 +105,8 @@
                 </div>
                 <div class="col-md-6 text-md-start">
                     <h5 class="color-vert">Contact</h5>
-                    <p>📧 Email : <a href="mailto:contact@assocpetitsponts.fr" class="color-vert">contact@assocpetitsponts.fr</a></p>
-                    <p>📞 Téléphone :<span class="color-vert"> 06 12 34 56 78</span></p>
+                    <p>📧 Email : <a href="mailto:lesptitsponts43@gmail.com" class="color-vert">lesptitsponts43@gmail.com</a></p>
+                    <p>📞 Téléphone :<span class="color-vert"> 07-54-55-09-49 ou 06-37-08-00-14</span></p>
                     <p>&copy; 2026 Association <span class="color-vert">Les Petits Ponts</span></p>
                 </div>
             </div>

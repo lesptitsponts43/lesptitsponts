@@ -9,6 +9,7 @@ use App\Entity\BlocAccueil;
 use App\Entity\Valeur;
 use App\Entity\Galerie;
 use App\Entity\Partenaire;
+use App\Entity\Commande;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -44,6 +45,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud("Valeur page d'accueil", 'fas fa-newspaper', Valeur::class);
         yield MenuItem::linkToCrud("Galerie photos", 'fas fa-newspaper', Galerie::class);
         yield MenuItem::linkToCrud("Partenaires", 'fas fa-newspaper', Partenaire::class);
+        yield MenuItem::linkToCrud(
+            'Commandes',
+            'fa fa-shopping-cart',
+            Commande::class
+        );
 
         // Lien retour vers le site
         yield MenuItem::linkToRoute('Retour site', 'fas fa-arrow-left', 'home');
