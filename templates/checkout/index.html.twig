@@ -2,85 +2,238 @@
 
 {% block title %}Finaliser ma commande{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        .checkout-page {
+            max-width: 1000px;
+            margin: 60px auto;
+        }
+
+        .checkout-title {
+            color: #2c3e50;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .checkout-card {
+            border: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background: white;
+        }
+
+        .checkout-header {
+            background-color: #2c3e50;
+            color: #27ae60;
+            padding: 14px 18px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .checkout-body {
+            padding: 25px 22px;
+        }
+
+        .checkout-intro {
+            background: #eefaf5;
+            border-left: 3px solid #27ae60;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .checkout-intro strong {
+            color: #27ae60;
+        }
+
+        .checkout-form .form-label {
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .checkout-form .form-control {
+            border: 1px solid #d7dce0;
+            border-radius: 6px;
+            padding: 10px 12px;
+            transition: all 0.2s ease;
+        }
+
+        .checkout-form .form-control:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 0.15rem rgba(39, 174, 96, 0.15);
+        }
+
+        .checkout-total {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .checkout-total-label {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .checkout-total-price {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background-color: #27ae60;
+            border: none;
+            color: white;
+            padding: 11px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn-checkout:hover {
+            background-color: #1e7836;
+            color: white;
+        }
+
+        .checkout-back {
+            display: inline-block;
+            margin-top: 18px;
+            color: #27ae60;
+            text-decoration: none;
+        }
+
+        .checkout-back:hover {
+            color: #1e7836;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .checkout-page {
+                margin: 30px auto;
+                padding: 0 15px;
+            }
+
+            .checkout-header {
+                font-size: 1.3rem;
+            }
+
+            .checkout-body {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 
-<div class="container my-5">
+<div class="container checkout-page">
 
-    <div class="row justify-content-center">
+    <h1 class="checkout-title">
+        Finaliser ma commande
+    </h1>
 
-        <div class="col-lg-8">
+    <div class="checkout-card">
 
-            <h1 class="mb-4">
-                Finaliser ma commande
-            </h1>
+        <div class="checkout-header">
+            Vos informations
+        </div>
 
-            <div class="card shadow-sm">
+        <div class="checkout-body">
 
-                <div class="card-body p-4">
+            <div class="checkout-intro">
+                Merci de renseigner vos coordonnées afin
+                <strong>d'enregistrer votre réservation.</strong>
+            </div>
 
-                    <h3 class="mb-4">
-                        Vos informations
-                    </h3>
+            {{ form_start(form, {
+                'attr': {
+                    'class': 'checkout-form'
+                }
+            }) }}
 
-                    {{ form_start(form) }}
+                <div class="row">
 
-                        <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.prenom) }}
+                        {{ form_widget(form.prenom, {
+                            'attr': {
+                                'class': 'form-control'
+                            }
+                        }) }}
+                        {{ form_errors(form.prenom) }}
+                    </div>
 
-                            <div class="col-md-6 mb-3">
-                                {{ form_row(form.prenom) }}
-                            </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom, {
+                            'attr': {
+                                'class': 'form-control'
+                            }
+                        }) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
 
-                            <div class="col-md-6 mb-3">
-                                {{ form_row(form.nom) }}
-                            </div>
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {
+                            'attr': {
+                                'class': 'form-control'
+                            }
+                        }) }}
+                        {{ form_errors(form.email) }}
+                    </div>
 
-                            <div class="col-md-6 mb-3">
-                                {{ form_row(form.email) }}
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                {{ form_row(form.telephone) }}
-                            </div>
-
-                        </div>
-
-                        <hr>
-
-                        <div class="d-flex justify-content-between mb-3">
-
-                            <strong>
-                                Total de la commande
-                            </strong>
-
-                            <strong class="fs-4">
-                                {{ total|number_format(2, ',', ' ') }} €
-                            </strong>
-
-                        </div>
-
-                        <button
-                            type="submit"
-                            class="btn btn-success w-100"
-                        >
-                            Continuer →
-                        </button>
-
-                    {{ form_end(form) }}
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.telephone) }}
+                        {{ form_widget(form.telephone, {
+                            'attr': {
+                                'class': 'form-control'
+                            }
+                        }) }}
+                        {{ form_errors(form.telephone) }}
+                    </div>
 
                 </div>
 
-            </div>
+                <div class="checkout-total">
 
-            <div class="text-center mt-3">
+                    <div class="d-flex justify-content-between align-items-center">
 
-                <a href="{{ path('order') }}">
-                    ← Retour au panier
-                </a>
+                        <span class="checkout-total-label">
+                            Total de la commande
+                        </span>
 
-            </div>
+                        <span class="checkout-total-price">
+                            {{ total|number_format(2, ',', ' ') }} €
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn-checkout">
+                        Continuer →
+                    </button>
+                </div>
+
+            {{ form_end(form) }}
 
         </div>
 
+    </div>
+
+    <div class="text-center">
+        <a href="{{ path('order') }}" class="checkout-back">
+            ← Retour au panier
+        </a>
     </div>
 
 </div>

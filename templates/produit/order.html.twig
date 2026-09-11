@@ -73,24 +73,15 @@
                                     <form
                                         method="post"
                                         action="{{ path('panier_modifier', {id: item.produit.id}) }}"
-                                        class="d-flex"
                                     >
-
                                         <input
                                             type="number"
                                             name="quantite"
                                             value="{{ item.quantite }}"
                                             min="1"
                                             class="form-control"
+                                            onchange="this.form.submit()"
                                         >
-
-                                        <button
-                                            type="submit"
-                                            class="btn btn-secondary ms-2"
-                                        >
-                                            OK
-                                        </button>
-
                                     </form>
 
                                 </div>
