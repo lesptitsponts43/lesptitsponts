@@ -28,9 +28,11 @@ class ActualiteCrudController extends AbstractCrudController
         yield TextField::new('titre', 'Titre');
         
         yield TextEditorField::new('description', 'Description');
+
+        yield DateTimeField::new('date', 'Date');
         
         yield ImageField::new('image', 'Image')
-            ->setBasePath('/uploads/galerie')
+            ->setBasePath('/uploads/actualites')
             ->onlyOnIndex();
 
         yield TextField::new('imageFile', 'Télécharger une image')

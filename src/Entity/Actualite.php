@@ -44,6 +44,8 @@ class Actualite
     public function __construct()
     {
         $this->produits = new ArrayCollection();
+        $this->date = new \DateTimeImmutable();
+
     }
 
     // --- Getters & Setters ---
