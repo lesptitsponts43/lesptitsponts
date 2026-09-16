@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Commande;
+use App\Entity\Contact;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportException;
 use Symfony\Component\Mailer\MailerInterface;
@@ -60,6 +61,29 @@ class EmailService
             $this->mailer->send($email);
         } catch (TransportException $e) {
             // Keep the payment flow working even if the mail transport is unavailable.
+        }
+    }
+
+    public function sendAdminContactNotification(Contact $contact): void
+    {
+        if (!$this->adminEmail) {
+            return;
+        }
+
+        $email = (new TemplatedEmail())
+            ->from($this->fromEmail)
+            ->to($this->adminEmail)
+            ->replyTo($contact->getMail())
+            ->subject('Nouvelle demande de contact : ' . $contact->getSujet())
+            ->htmlTemplate('emails/contact_admin.html.twig')
+            ->context([
+                'contact' => $contact,
+            ]);
+
+        try {
+            $this->mailer->send($email);
+        } catch (TransportException $e) {
+            // Keep the contact flow working even if the mail transport is unavailable.
         }
     }
 }
