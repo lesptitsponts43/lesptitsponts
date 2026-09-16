@@ -16,23 +16,25 @@
     {% if actualites is defined and actualites|length > 0 %}
         <div class="news-grid">
             {% for actualite in actualites %}
-                <article class="news-card">
-                    {% if actualite.image %}
-                        <img src="{{ asset('/uploads/actualite/' ~ actualite.image) }}" alt="{{ actualite.titre }}" class="news-image">
-                    {% else %}
-                        <div class="news-image"></div>
-                    {% endif %}
-                    
-                    <div class="news-content">
-                        <h2 class="news-title">{{ actualite.titre }}</h2>
-                        <p class="news-excerpt">
-                            <i>{{ actualite.description|raw }}</i>
-                        </p>
-                        <div class="news-meta">
-                            <div class="news-date">🕒 {{ actualite.date|date('d/m/Y') }}</div>
+                <a href="{{ path('news_show', {'id': actualite.id}) }}" class="text-decoration-none text-dark">
+                    <article class="news-card">
+                        {% if actualite.image %}
+                            <img src="{{ asset('/uploads/actualite/' ~ actualite.image) }}" alt="{{ actualite.titre }}" class="news-image">
+                        {% else %}
+                            <div class="news-image"></div>
+                        {% endif %}
+                        
+                        <div class="news-content">
+                            <h2 class="news-title">{{ actualite.titre }}</h2>
+                            <p class="news-excerpt">
+                                <i>{{ actualite.description|raw }}</i>
+                            </p>
+                            <div class="news-meta">
+                                <div class="news-date">🕒 {{ actualite.date|date('d/m/Y') }}</div>
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
+                </a>
             {% endfor %}
         </div>
     {% else %}

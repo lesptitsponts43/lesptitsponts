@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de commande{% endblock %}
+
+{% block body %}
+
+<div class="container my-5">
+
+    <div class="text-center">
+
+        {% if commande.statut == 'PAYEE' %}
+
+            <div class="alert alert-success">
+                <h2>✅ Paiement confirmé</h2>
+                <p>Merci {{ commande.prenom }}, votre commande <strong>{{ commande.numeroCommande }}</strong> a bien été enregistrée.</p>
+            </div>
+
+        {% elseif commande.statut == 'ANNULEE' %}
+
+            <div class="alert alert-secondary">
+                <h2>⏸️ Paiement annulé</h2>
+                <p>Le paiement de votre commande <strong>{{ commande.numeroCommande }}</strong> a été annulé.</p>
+                <p class="text-muted">Votre panier est conservé, vous pouvez recommencer le paiement.</p>
+            </div>
+
+        {% elseif commande.statut in ['ECHEC', 'REFUSE'] %}
+
+            <div class="alert alert-danger">
+                <h2>❌ Paiement refusé</h2>
+                <p>Le paiement de votre commande <strong>{{ commande.numeroCommande }}</strong> n’a pas été accepté.</p>
+                <p class="text-muted">Votre panier est conservé, vous pouvez réessayer ou modifier votre moyen de paiement.</p>
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-warning">
+                <h2>⏳ Paiement en attente</h2>
+                <p>Nous n'avons pas encore de confirmation de paiement pour la commande <strong>{{ commande.numeroCommande }}</strong>.</p>
+                <p class="text-muted">Si vous venez de payer, rechargez cette page dans quelques instants.</p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-body">
+
+            <h4>Récapitulatif de la commande</h4>
+            <hr>
+
+            {% for ligne in commande.ligneCommandes %}
+                <div class="d-flex justify-content-between mb-2">
+                    <span>{{ ligne.produit.titre }} × {{ ligne.quantite }}</span>
+                    <span>{{ (ligne.prixUnitaire * ligne.quantite)|number_format(2, ',', ' ') }} €</span>
+                </div>
+            {% endfor %}
+
+            <hr>
+
+            <div class="d-flex justify-content-between">
+                <strong>Total</strong>
+                <strong>{{ commande.total|number_format(2, ',', ' ') }} €</strong>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ path('products') }}" class="btn btn-primary">Continuer mes achats</a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Finaliser ma commande{% endblock %}
+
+{% block body %}
+
+<div class="container my-5">
+
+    <h1 class="mb-4 text-center">Finaliser ma commande</h1>
+
+    <div class="row">
+
+        <div class="col-lg-7">
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4>Vos informations</h4>
+
+                    <form method="post" action="{{ path('commande_valider') }}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nom</label>
+                            <input type="text" name="nom" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Prénom</label>
+                            <input type="text" name="prenom" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Téléphone</label>
+                            <input type="tel" name="telephone" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-success w-100">
+                            Payer {{ total|number_format(2, ',', ' ') }} €
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h4>Récapitulatif</h4>
+                    <hr>
+
+                    {% for item in panier %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ item.produit.titre }} × {{ item.quantite }}</span>
+                            <span>{{ item.total|number_format(2, ',', ' ') }} €</span>
+                        </div>
+                    {% endfor %}
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between">
+                        <strong>Total</strong>
+                        <strong>{{ total|number_format(2, ',', ' ') }} €</strong>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

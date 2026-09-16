@@ -127,4 +127,5 @@ class PanierService
 
         return $total;
     }
+    
 }

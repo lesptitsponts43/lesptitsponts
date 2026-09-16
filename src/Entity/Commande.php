@@ -37,6 +37,16 @@ class Commande
     #[ORM\Column(length: 30)]
     private ?string $statut = null;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $sumupCheckoutId = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $modePaiement = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $numeroAffichage = null;
+
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -187,6 +197,38 @@ class Commande
             }
         }
 
+        return $this;
+    }
+    public function getSumupCheckoutId(): ?string
+    {
+        return $this->sumupCheckoutId;
+    }
+
+    public function setSumupCheckoutId(?string $sumupCheckoutId): static
+    {
+        $this->sumupCheckoutId = $sumupCheckoutId;
+
+        return $this;
+    }
+    public function getModePaiement(): ?string
+    {
+        return $this->modePaiement;
+    }
+
+    public function setModePaiement(?string $modePaiement): static
+    {
+        $this->modePaiement = $modePaiement;
+        return $this;
+    }
+
+    public function getNumeroAffichage(): ?int
+    {
+        return $this->numeroAffichage;
+    }
+
+    public function setNumeroAffichage(?int $numeroAffichage): static
+    {
+        $this->numeroAffichage = $numeroAffichage;
         return $this;
     }
 }

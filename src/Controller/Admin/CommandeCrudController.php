@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Commande;
+use App\Enum\StatutCommande;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -42,15 +43,26 @@ class CommandeCrudController extends AbstractCrudController
 
         yield ChoiceField::new('statut', 'Statut')
             ->setChoices([
-                'À payer' => 'A_PAYER',
-                'Payée' => 'PAYEE',
-                'Annulée' => 'ANNULEE',
+                'À payer' => StatutCommande::A_PAYER,
+                'Payée' => StatutCommande::PAYEE,
+                'En préparation' => StatutCommande::EN_PREPARATION,
+                'Distribuée' => StatutCommande::DISTRIBUEE,
+                'Annulée' => StatutCommande::ANNULEE,
+                'Échec paiement' => StatutCommande::ECHEC,
+                'Refusée' => StatutCommande::REFUSE,
             ])
             ->renderAsBadges([
-                'A_PAYER' => 'warning',
-                'PAYEE' => 'success',
-                'ANNULEE' => 'danger',
+                StatutCommande::A_PAYER => 'warning',
+                StatutCommande::PAYEE => 'success',
+                StatutCommande::EN_PREPARATION => 'info',
+                StatutCommande::DISTRIBUEE => 'secondary',
+                StatutCommande::ANNULEE => 'dark',
+                StatutCommande::ECHEC => 'danger',
+                StatutCommande::REFUSE => 'danger',
             ]);
+
+        yield TextField::new('modePaiement', 'Mode de paiement')
+            ->setHelp('Paiement enregistré pour la commande');
 
         yield DateTimeField::new('createdAt', 'Date')
             ->setFormat('dd/MM/yyyy HH:mm');
@@ -59,6 +71,7 @@ class CommandeCrudController extends AbstractCrudController
             ->onlyOnDetail()
             ->setTemplatePath('admin/commande/produits.html.twig');
     }
+
     public function configureActions(Actions $actions): Actions
     {
         return $actions
